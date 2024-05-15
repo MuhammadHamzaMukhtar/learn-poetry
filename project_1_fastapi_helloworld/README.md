@@ -45,3 +45,36 @@ def piaic():
 
 7. run server
 `poetry run uvicorn project_1_fastapi_helloworld.main:app --reload`
+
+8. `http://127.0.0.1:8000/`
+    * `http://127.0.0.1:8000/piaic/`
+
+9. `http://127.0.0.1:8000/docs`
+
+10. write your own test
+    * `test/test_main.py`
+
+    ```
+    from fastapi.testclient import TestClient
+    from project_1_fastapi_helloworld.main import app
+
+    def test_root_path():
+        client = TestClient(app=app)
+        response = client.get("/")
+        assert response.status_code == 200
+        assert response.json() == {"message": "Hello, World!"}
+        
+    def test_piaic_path():
+        client = TestClient(app=app)
+        response = client.get("/piaic/")
+        assert response.status_code == 200
+        assert response.json() == {"organization": "Welcome to PIAIC!"}
+        
+    def test_third_check():
+        client = TestClient(app=app)
+        response = client.get("/piaic/")
+        assert response.status_code == 200
+        assert response.json() == {"organization": "ABC"}
+    ```
+
+11. `poetry run pytest -v`
