@@ -28,3 +28,20 @@ fastapi = "^0.111.0"
 uvicorn = {extras = ["standard"], version = "^0.290"}
 ```
 6. create `main.py` location `project_1\main.py`
+
+```
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def index():
+    return {"message": "Hello, World!"}
+
+@app.get("/piaic/")
+def piaic():
+    return {"organization": "Welcome to PIAIC!"}
+```
+
+7. run server
+`poetry run uvicorn project_1_fastapi_helloworld.main:app --reload`
